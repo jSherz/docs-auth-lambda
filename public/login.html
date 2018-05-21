@@ -10,19 +10,8 @@
           integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
     <style type="text/css">
-        html, body {
-            min-height: 100%;
-            background: url("./images/grey.png");
-        }
-
-        #login {
-            background: white;
-            padding: 2rem 0;
+        .container {
             margin-top: 2rem;
-        }
-
-        #login-button .abcRioButton {
-            margin: 0 auto;
         }
     </style>
 </head>
@@ -33,14 +22,17 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div id="login" class="col-lg-6 align-self-center">
-                    <h1>Authentication Required</h1>
-                    <p class="lead text-muted">Login with your GSuite account
-                    <p>
-                    <div id="login-button" style="display: none;"></div>
-                    <div id="logout-button" style="display: none">
-                        <button type="button" class="btn btn-danger" onclick="signOut();">Logout</button>
+                    <div class="card">
+                        <div class="card-body">
+                            <h1 class="card-title">Authentication Required</h1>
+                            <p class="card-text text-muted">
+                                Sign in with your GSuite account.
+                            </p>
+                            <p>
+                                <a href="__LOGIN_URL__" class="btn btn-primary">Login</a>
+                            </p>
+                        </div>
                     </div>
-                    <div id="loading">Loading...</div>
                 </div>
             </div>
         </div>
@@ -56,69 +48,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.0/src/js.cookie.js"
-        integrity="sha256-ZTMFCvouhTVozUsLgEjtZOlJY+OAiLImV1p8yoBU9OI=" crossorigin="anonymous"></script>
-<script>
-  const COOKIE_NAME = "docs-jwt";
-
-  function appStart() {
-    console.log("Loading GAPI auth...");
-    gapi.load("auth2", initSigninV2);
-  };
-
-  const initSigninV2 = function () {
-    const auth2 = gapi.auth2.init({
-      client_id: "765451412297-gjo3f12gg27hrd0makgp0vv1rba0an9e.apps.googleusercontent.com",
-      scope: "profile email"
-    });
-
-    auth2.isSignedIn.listen(signinChanged);
-
-    auth2.currentUser.listen(userChanged);
-
-    if (auth2.isSignedIn.get() === true) {
-      auth2.signIn();
-    } else {
-      signinChanged(false);
-    }
-
-    gapi.signin2.render("login-button", {
-      scope: "profile email",
-      width: 240,
-      height: 50,
-      longtitle: true,
-      theme: "dark"
-    });
-  };
-
-  const signinChanged = function (isSignedIn) {
-    $("#loading").hide();
-
-    if (isSignedIn) {
-      $("#logout-button").show();
-      $("#login-button").hide();
-    } else {
-      $("#logout-button").hide();
-      $("#login-button").show();
-    }
-  };
-
-  const userChanged = function (user) {
-    console.log("User now:", user);
-
-    if (user.isSignedIn() && !Cookies.get(COOKIE_NAME)) {
-      console.log(user.getAuthResponse().id_token);
-    }
-  };
-
-  const signOut = function () {
-    const auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log("User signed out.");
-    });
-  }
-</script>
-
-<script src="https://apis.google.com/js/platform.js?onload=appStart" async defer></script>
 </body>
 </html>
