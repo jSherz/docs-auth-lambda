@@ -11,5 +11,6 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "inlineSourceMap": true
-  }
+  },
+  "exclude": ["**/__tests__/**/*.spec.ts"]
 }
