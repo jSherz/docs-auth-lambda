@@ -6,6 +6,8 @@
   "private": true,
   "scripts": {
     "build": "tsc -p .",
+    "prepackage": "rm -rf dist/* && yarn build && NODE_ENV=production yarn",
+    "package": "cp -r public node_modules dist/ && cd dist && zip -r ../function.zip .",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "test": "jest",
     "test:watch": "jest --watch",
