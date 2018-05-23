@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "build": "tsc -p .",
-    "prepackage": "rm -rf dist/* && yarn build && NODE_ENV=production yarn",
+    "prepackage": "rm -rf dist/* function.zip && yarn build && NODE_ENV=production yarn",
     "package": "cp -r public node_modules dist/ && cd dist && zip -r ../function.zip .",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "test": "jest",
@@ -14,6 +14,7 @@
     "test:coverage": "jest --coverage"
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.3",
     "@types/cookie": "^0.3.1",
     "@types/jest": "^22.2.3",
     "@types/jsonwebtoken": "^7.2.7",
@@ -26,11 +27,10 @@
     "typescript": "^2.8.3"
   },
   "dependencies": {
-    "@types/aws-lambda": "^8.10.3",
+    "axios": "^0.18.0",
     "cookie": "^0.3.1",
-    "googleapis": "^30.0.0",
     "jsonwebtoken": "^8.2.1",
-    "lodash": "^4.17.10"
+    "qs": "^6.5.2"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -48,5 +48,9 @@
       "src/**/*.ts",
       "!src/**/__tests__/*"
     ]
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "arrowParens": "always"
   }
 }
