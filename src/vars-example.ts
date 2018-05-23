@@ -10,3 +10,4 @@ export const GOOGLE_CLIENT_SECRET = "";
 export const JWT_SECRET = "";
 export const ROOT_URL = "http://localhost";
 export const REDIRECT_URL = ROOT_URL + "/login.php3";
+export const DOMAIN = "mycompany.com";

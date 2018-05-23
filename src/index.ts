@@ -13,7 +13,7 @@ import {
   makeLogoutCookieHeader,
   makeSetCookieHeader,
 } from "./services/auth";
-import { REDIRECT_URL, ROOT_URL } from "./vars";
+import { DOMAIN, REDIRECT_URL, ROOT_URL } from "./vars";
 
 const isAxiosError = (err: any): err is AxiosError => err.code;
 
@@ -57,7 +57,7 @@ export const handler: CloudFrontRequestHandler = async (
         console.log("checking code");
         const authResponse = await authenticate(code);
 
-        if (authResponse.hd === "hive.hr") {
+        if (authResponse.hd === DOMAIN) {
           console.info("login succeded");
 
           return {
