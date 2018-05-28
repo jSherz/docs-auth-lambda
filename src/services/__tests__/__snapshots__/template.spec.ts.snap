@@ -32,7 +32,7 @@ exports[`services/template renderTemplate renders a template with an error 1`] =
                                 Sign in with your GSuite account.
                             </p>
                             <p>
-                                <a href=\\"https://accounts.google.com/o/oauth2/v2/auth?scope=email&include_granted_scopes=true&redirect_uri=https://d2isfcdxdi4wm9.cloudfront.net/login.php3&response_type=code&client_id=674222348431-8kgaftfbumtqcr9b5cpn7880104u5n0h.apps.googleusercontent.com\\" class=\\"btn btn-primary\\">Login</a>
+                                <a href=\\"https://accounts.google.com/o/oauth2/v2/auth?scope=email&include_granted_scopes=true&redirect_uri=https://mydocs.cloudfront.net/login.php3&response_type=code&client_id=app-appy.apps.googleusercontent.com\\" class=\\"btn btn-primary\\">Login</a>
                             </p>
                             <div class=\\"alert alert-danger\\" role=\\"alert\\" style=\\"\\">bad thingz happened</div>
                         </div>
@@ -89,7 +89,7 @@ exports[`services/template renderTemplate renders a template without an error 1`
                                 Sign in with your GSuite account.
                             </p>
                             <p>
-                                <a href=\\"https://accounts.google.com/o/oauth2/v2/auth?scope=email&include_granted_scopes=true&redirect_uri=https://d2isfcdxdi4wm9.cloudfront.net/login.php3&response_type=code&client_id=674222348431-8kgaftfbumtqcr9b5cpn7880104u5n0h.apps.googleusercontent.com\\" class=\\"btn btn-primary\\">Login</a>
+                                <a href=\\"https://accounts.google.com/o/oauth2/v2/auth?scope=email&include_granted_scopes=true&redirect_uri=https://mydocs.cloudfront.net/login.php3&response_type=code&client_id=app-appy.apps.googleusercontent.com\\" class=\\"btn btn-primary\\">Login</a>
                             </p>
                             <div class=\\"alert alert-danger\\" role=\\"alert\\" style=\\"display: none\\"></div>
                         </div>
