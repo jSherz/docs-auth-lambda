@@ -4,6 +4,7 @@ node_js:
 cache: yarn
 
 install:
+  - cp src/vars-example.ts src/vars.ts
   - yarn
 
 script:
