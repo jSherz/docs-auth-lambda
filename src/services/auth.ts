@@ -41,11 +41,15 @@ export const isAuthenticated = (req: CloudFrontRequest): boolean => {
   }
 };
 
+export enum TokenTypes {
+  Bearer,
+}
+
 export interface ICodeResponse {
   access_token: string;
   id_token: string;
   expires_in: number;
-  token_type: "Bearer";
+  token_type: TokenTypes;
   refresh_token: string;
 }
 
@@ -57,8 +61,8 @@ export interface IUser {
   azp: string;
   email: string;
   aud: string;
-  iat: string;
-  exp: string;
+  iat: number;
+  exp: number;
   nonce: string;
   hd: string;
 }

@@ -7,15 +7,16 @@ import {
 
 import { AxiosError } from "axios";
 import { parse } from "qs";
-import { isAuthenticated, renderTemplate } from "./services";
 import {
   authenticate,
+  isAuthenticated,
   makeLogoutCookieHeader,
   makeSetCookieHeader,
-} from "./services/auth";
+  renderTemplate,
+} from "./services";
 import { DOMAIN, REDIRECT_URL, ROOT_URL } from "./vars";
 
-const isAxiosError = (err: any): err is AxiosError => err.code;
+const isAxiosError = (err: any): err is AxiosError => err.config;
 
 export const handler: CloudFrontRequestHandler = async (
   event: CloudFrontRequestEvent,
@@ -58,7 +59,7 @@ export const handler: CloudFrontRequestHandler = async (
         const authResponse = await authenticate(code);
 
         if (authResponse.hd === DOMAIN) {
-          console.info("login succeded");
+          console.log("login succeeded");
 
           return {
             headers: {
@@ -91,7 +92,7 @@ export const handler: CloudFrontRequestHandler = async (
         console.error("failed to authenticate user");
 
         if (isAxiosError(err) && err.response) {
-          console.error(err.response.data);
+          console.error(`code ${err.response.status}: ${err.response.data}`);
         }
 
         return {
@@ -125,7 +126,7 @@ export const handler: CloudFrontRequestHandler = async (
     console.error(err);
 
     if (isAxiosError(err) && err.response) {
-      console.error(err.response.data);
+      console.error(`code ${err.response.status}: ${err.response.data}`);
     }
 
     return {
