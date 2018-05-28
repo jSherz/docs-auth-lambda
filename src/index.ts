@@ -35,7 +35,7 @@ const setCookieAndRedirect = (
   cookie: string,
 ): CloudFrontRequestResult => ({
   headers: {
-    Location: [
+    "Location": [
       {
         key: "Location",
         value: url,
