@@ -16,7 +16,40 @@ import {
 } from "./services";
 import { DOMAIN, REDIRECT_URL, ROOT_URL } from "./vars";
 
+const LOGIN_RESPONSE: CloudFrontRequestResult = {
+  headers: {
+    location: [
+      {
+        key: "Location",
+        value: "/login.php3",
+      },
+    ],
+  },
+  status: "302",
+};
+
 const isAxiosError = (err: any): err is AxiosError => err.config;
+
+const setCookieAndRedirect = (
+  url: string,
+  cookie: string,
+): CloudFrontRequestResult => ({
+  headers: {
+    Location: [
+      {
+        key: "Location",
+        value: url,
+      },
+    ],
+    "Set-Cookie": [
+      {
+        key: "Set-Cookie",
+        value: cookie,
+      },
+    ],
+  },
+  status: "302",
+});
 
 export const handler: CloudFrontRequestHandler = async (
   event: CloudFrontRequestEvent,
@@ -31,23 +64,7 @@ export const handler: CloudFrontRequestHandler = async (
       if (request.uri.endsWith("/logout.php3")) {
         console.log("logging out");
 
-        return {
-          headers: {
-            "Location": [
-              {
-                key: "Location",
-                value: REDIRECT_URL,
-              },
-            ],
-            "Set-Cookie": [
-              {
-                key: "Set-Cookie",
-                value: makeLogoutCookieHeader(),
-              },
-            ],
-          },
-          status: "302",
-        };
+        return setCookieAndRedirect(REDIRECT_URL, makeLogoutCookieHeader());
       } else {
         console.log("auth ok");
 
@@ -61,23 +78,10 @@ export const handler: CloudFrontRequestHandler = async (
         if (authResponse.hd === DOMAIN) {
           console.log("login succeeded");
 
-          return {
-            headers: {
-              "Location": [
-                {
-                  key: "Location",
-                  value: ROOT_URL,
-                },
-              ],
-              "Set-Cookie": [
-                {
-                  key: "Set-Cookie",
-                  value: makeSetCookieHeader(authResponse),
-                },
-              ],
-            },
-            status: "302",
-          };
+          return setCookieAndRedirect(
+            ROOT_URL,
+            makeSetCookieHeader(authResponse),
+          );
         } else {
           console.error("non domain user - rejecting request");
 
@@ -110,17 +114,7 @@ export const handler: CloudFrontRequestHandler = async (
     } else {
       console.log("not authenticated & no code - redirecting to login");
 
-      return {
-        headers: {
-          location: [
-            {
-              key: "Location",
-              value: "/login.php3",
-            },
-          ],
-        },
-        status: "302",
-      };
+      return LOGIN_RESPONSE;
     }
   } catch (err) {
     console.error(err);
