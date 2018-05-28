@@ -1,7 +1,7 @@
-import { handler } from "../index";
 import { CloudFrontRequest, CloudFrontRequestEvent } from "aws-lambda";
-import { IUser } from "../services/auth";
 import { AxiosError } from "axios";
+import { handler } from "../index";
+import { IUser } from "../services/auth";
 
 jest.mock("../services");
 jest.mock("../vars");
@@ -47,11 +47,11 @@ describe("index", () => {
           cf: {
             config: {} as any,
             request: {
-              querystring: "",
               clientIp: "unused",
-              method: "unused",
-              uri: "unused",
               headers: {},
+              method: "unused",
+              querystring: "",
+              uri: "unused",
             },
           },
         },
@@ -74,10 +74,7 @@ describe("index", () => {
     const [logSpy] = mockConsole();
 
     const request: CloudFrontRequest = {
-      querystring: "",
       clientIp: "unused",
-      method: "unused",
-      uri: "unused",
       headers: {
         cookie: [
           {
@@ -86,6 +83,9 @@ describe("index", () => {
           },
         ],
       },
+      method: "unused",
+      querystring: "",
+      uri: "unused",
     };
 
     const event: CloudFrontRequestEvent = {
@@ -118,10 +118,7 @@ describe("index", () => {
           cf: {
             config: {} as any,
             request: {
-              querystring: "",
               clientIp: "unused",
-              method: "unused",
-              uri: "/logout.php3",
               headers: {
                 cookie: [
                   {
@@ -130,6 +127,9 @@ describe("index", () => {
                   },
                 ],
               },
+              method: "unused",
+              querystring: "",
+              uri: "/logout.php3",
             },
           },
         },
@@ -143,7 +143,7 @@ describe("index", () => {
 
     expect(result).toEqual({
       headers: {
-        Location: [
+        "Location": [
           {
             key: "Location",
             value: "https://mydocs.cloudfront.net/login.php3",
@@ -165,10 +165,7 @@ describe("index", () => {
           cf: {
             config: {} as any,
             request: {
-              querystring: "code=fuubar",
               clientIp: "unused",
-              method: "unused",
-              uri: "unused",
               headers: {
                 cookie: [
                   {
@@ -177,6 +174,9 @@ describe("index", () => {
                   },
                 ],
               },
+              method: "unused",
+              querystring: "code=fuubar",
+              uri: "unused",
             },
           },
         },
@@ -194,7 +194,7 @@ describe("index", () => {
 
     expect(result).toEqual({
       headers: {
-        Location: [{ key: "Location", value: "https://mydocs.cloudfront.net" }],
+        "Location": [{ key: "Location", value: "https://mydocs.cloudfront.net" }],
         "Set-Cookie": [{ key: "Set-Cookie", value: "mycookie=wowowowow" }],
       },
       status: "302",
@@ -213,10 +213,7 @@ describe("index", () => {
           cf: {
             config: {} as any,
             request: {
-              querystring: "code=fuubar",
               clientIp: "unused",
-              method: "unused",
-              uri: "unused",
               headers: {
                 cookie: [
                   {
@@ -225,6 +222,9 @@ describe("index", () => {
                   },
                 ],
               },
+              method: "unused",
+              querystring: "code=fuubar",
+              uri: "unused",
             },
           },
         },
@@ -259,11 +259,11 @@ describe("index", () => {
           cf: {
             config: {} as any,
             request: {
-              querystring: "",
               clientIp: "unused",
-              method: "unused",
-              uri: "/login.php3",
               headers: {},
+              method: "unused",
+              querystring: "",
+              uri: "/login.php3",
             },
           },
         },
@@ -291,11 +291,11 @@ describe("index", () => {
           cf: {
             config: {} as any,
             request: {
-              querystring: "code=tryme",
               clientIp: "unused",
-              method: "unused",
-              uri: "unused",
               headers: {},
+              method: "unused",
+              querystring: "code=tryme",
+              uri: "unused",
             },
           },
         },
@@ -330,11 +330,11 @@ describe("index", () => {
           cf: {
             config: {} as any,
             request: {
-              querystring: "code=tryme",
               clientIp: "unused",
-              method: "unused",
-              uri: "unused",
               headers: {},
+              method: "unused",
+              querystring: "code=tryme",
+              uri: "unused",
             },
           },
         },
@@ -343,8 +343,8 @@ describe("index", () => {
 
     const error: AxiosError = {
       config: {},
-      name: "unused",
       message: "a bad thing happened",
+      name: "unused",
       response: {
         config: {},
         data: "bad request or some shiz",
@@ -377,11 +377,11 @@ describe("index", () => {
           cf: {
             config: {} as any,
             request: {
-              querystring: "unused",
               clientIp: "unused",
-              method: "unused",
-              uri: "/login.php3",
               headers: {},
+              method: "unused",
+              querystring: "unused",
+              uri: "/login.php3",
             },
           },
         },
@@ -409,11 +409,11 @@ describe("index", () => {
           cf: {
             config: {} as any,
             request: {
-              querystring: "",
               clientIp: "unused",
-              method: "unused",
-              uri: "/login.php3",
               headers: {},
+              method: "unused",
+              querystring: "",
+              uri: "/login.php3",
             },
           },
         },
@@ -422,8 +422,8 @@ describe("index", () => {
 
     const error: AxiosError = {
       config: {},
-      name: "unused",
       message: "a bad thing happened",
+      name: "unused",
       response: {
         config: {},
         data: "spilt milk",
