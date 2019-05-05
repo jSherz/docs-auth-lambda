@@ -14,7 +14,9 @@
     "test:coverage": "jest --coverage",
     "prettify": "prettier --write 'src/**/*.ts'",
     "coveralls": "cat coverage/lcov.info | node ./node_modules/coveralls/bin/coveralls.js",
-    "codacy": "cat coverage/lcov.info | codacy-coverage"
+    "codacy": "cat coverage/lcov.info | codacy-coverage",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.3",
@@ -37,7 +39,8 @@
     "axios": "^0.18.0",
     "cookie": "^0.3.1",
     "jsonwebtoken": "^8.2.1",
-    "qs": "^6.5.2"
+    "qs": "^6.5.2",
+    "snyk": "^1.161.1"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -63,5 +66,6 @@
   "prettier": {
     "trailingComma": "all",
     "arrowParens": "always"
-  }
+  },
+  "snyk": true
 }
